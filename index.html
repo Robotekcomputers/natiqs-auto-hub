@@ -102,8 +102,8 @@ section{padding:80px 40px}
 
 .car-card{background:var(--charcoal);border:1px solid rgba(201,168,76,0.08);border-radius:12px;overflow:hidden;transition:all .4s}
 .car-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,0.25);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
-.car-img{height:200px;background:var(--surface);overflow:hidden}
-.car-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.car-img{height:220px;background:var(--surface);overflow:hidden}
+.car-img img{width:100%;height:100%;object-fit:cover;object-position:center 25%;transition:transform .4s}
 .car-card:hover .car-img img{transform:scale(1.05)}
 .car-body{padding:20px}
 .car-year{font-family:var(--font-display);font-size:12px;color:var(--gold);letter-spacing:2px}
@@ -159,7 +159,7 @@ section{padding:80px 40px}
 .det-overlay.open{opacity:1;pointer-events:auto}
 .det-box{background:var(--charcoal);border:1px solid rgba(201,168,76,0.12);border-radius:12px;max-width:1200px;width:96%;max-height:95vh;overflow-y:auto;position:relative}
 .det-carousel{position:relative;height:70vh;max-height:700px;overflow:hidden;border-radius:12px 12px 0 0;background:var(--surface)}
-.det-car-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .5s}
+.det-car-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;opacity:0;transition:opacity .5s}
 .det-car-slide.active{opacity:1}
 .det-car-prev,.det-car-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);border:1px solid rgba(201,168,76,0.2);color:var(--white);width:44px;height:44px;border-radius:8px;cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;transition:all .3s;z-index:2}
 .det-car-prev{left:12px}.det-car-next{right:12px}
@@ -614,12 +614,16 @@ async function loadInventory() {
 
 function loadDemoInventory() {
   cars = [
-    { id:'1', year:2020, make:'Toyota', model:'Camry', price:18500, monthly:385, mileage:'45,000 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'', imgs:[] },
-    { id:'2', year:2019, make:'Honda', model:'CR-V', price:22000, monthly:458, mileage:'52,000 mi', drive:'AWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'', imgs:[] },
-    { id:'3', year:2021, make:'Ford', model:'F-150', price:32000, monthly:667, mileage:'38,000 mi', drive:'4WD', type:'truck', fuel:'Gasoline', badge:'Truck', img:'', imgs:[] },
-    { id:'4', year:2020, make:'Nissan', model:'Altima', price:16500, monthly:344, mileage:'55,000 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'', imgs:[] },
-    { id:'5', year:2018, make:'Chevrolet', model:'Equinox', price:17000, monthly:354, mileage:'62,000 mi', drive:'AWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'', imgs:[] },
-    { id:'6', year:2021, make:'Toyota', model:'RAV4', price:26500, monthly:552, mileage:'35,000 mi', drive:'AWD', type:'suv', fuel:'Hybrid', badge:'SUV', img:'', imgs:[] },
+    { id:'1', year:2025, make:'Toyota', model:'Corolla SE', price:22900, monthly:477, mileage:'213 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'carros/corolla.png', imgs:['carros/corolla.png'] },
+    { id:'2', year:2025, make:'Toyota', model:'Corolla LE', price:21500, monthly:448, mileage:'1,618 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'carros/corolla2.png', imgs:['carros/corolla2.png'] },
+    { id:'3', year:2025, make:'Toyota', model:'Corolla SE', price:19900, monthly:415, mileage:'4,873 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'carros/corolla3.png', imgs:['carros/corolla3.png'] },
+    { id:'4', year:2016, make:'Hyundai', model:'Accent SE', price:8900, monthly:185, mileage:'86,413 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'carros/hyundai.png', imgs:['carros/hyundai.png'] },
+    { id:'5', year:2019, make:'Infiniti', model:'QX30 Luxe', price:16900, monthly:352, mileage:'56,791 mi', drive:'AWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'carros/infi1.png', imgs:['carros/infi1.png'] },
+    { id:'6', year:2018, make:'Mercedes-Benz', model:'GLC 300', price:21500, monthly:448, mileage:'67,000 mi', drive:'RWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'carros/merc.png', imgs:['carros/merc.png'] },
+    { id:'7', year:2019, make:'Toyota', model:'RAV4', price:18900, monthly:394, mileage:'65,000 mi', drive:'FWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'carros/rav4.png', imgs:['carros/rav4.png'] },
+    { id:'8', year:2021, make:'Toyota', model:'RAV4 Hybrid LE', price:26500, monthly:552, mileage:'47,000 mi', drive:'AWD', type:'suv', fuel:'Hybrid', badge:'SUV', img:'carros/rav4 2.png', imgs:['carros/rav4 2.png'] },
+    { id:'9', year:2021, make:'Toyota', model:'RAV4 LE', price:24900, monthly:519, mileage:'61,000 mi', drive:'FWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'carros/rav4 3.png', imgs:['carros/rav4 3.png'] },
+    { id:'10', year:2022, make:'Tesla', model:'Model Y Long Range', price:32900, monthly:685, mileage:'42,000 mi', drive:'AWD', type:'suv', fuel:'Electric', badge:'SUV', img:'carros/tesla.png', imgs:['carros/tesla.png'] },
   ];
   document.getElementById('statCars').textContent = cars.length;
   renderCars();
