@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Natiq's Auto Hub - Quality used cars in Van Nuys, CA. Sedans, SUVs, Trucks. Easy financing, all credit types welcome.">
+<title>Natiq's Auto Hub | Quality Used Cars in Van Nuys, CA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════ */
+/* NATIQ'S AUTO HUB — GOLD & BLACK THEME */
+/* ═══════════════════════════════════════ */
+:root{
+  --black:#0a0a0a;--charcoal:#141414;--surface:#1a1a1a;
+  --gold:#c9a84c;--gold-light:#e8d48b;--gold-dark:#a07c2a;
+  --white:#f5f0e1;--gray:#8a8172;--gray-dark:#5a5347;
+  --font-display:'Bebas Neue',sans-serif;--font-body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--black);color:var(--gray);overflow-x:hidden}
+
+/* NOISE TEXTURE */
+body::before{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--gold-dark);border-radius:3px}
+
+/* ── NAVIGATION ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:80px;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.1);transition:all .3s}
+.logo img{height:65px;filter:drop-shadow(0 0 8px rgba(201,168,76,0.3))}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-family:var(--font-display);font-size:14px;letter-spacing:2px;color:var(--gray);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+.lang-btn{background:none;border:1px solid var(--gray-dark);color:var(--gray);padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer;font-weight:600;transition:all .3s}
+.lang-btn.active{border-color:var(--gold);color:var(--gold)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:24px;height:2px;background:var(--white);transition:all .3s}
+
+/* ── MOBILE NAV ── */
+.mob-overlay{position:fixed;inset:0;background:rgba(10,10,10,0.95);z-index:99;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.mob-overlay.open{opacity:1;pointer-events:auto}
+.mob-overlay a{font-family:var(--font-display);font-size:28px;letter-spacing:3px;color:var(--white);text-decoration:none}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,0.08) 0%,transparent 60%)}
+
+/* African pattern overlay */
+.hero-pattern{position:absolute;inset:0;opacity:0.03;background-image:repeating-linear-gradient(45deg,var(--gold) 0px,var(--gold) 1px,transparent 1px,transparent 20px),repeating-linear-gradient(-45deg,var(--gold) 0px,var(--gold) 1px,transparent 1px,transparent 20px)}
+
+.hero-split{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;max-width:1200px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.hero-left{padding-right:40px}
+
+.hero-badge{display:inline-block;font-family:var(--font-display);font-size:12px;letter-spacing:3px;color:var(--gold);border:1px solid rgba(201,168,76,0.3);padding:8px 16px;border-radius:4px;margin-bottom:24px;background:rgba(201,168,76,0.05)}
+
+h1.hero-title{font-family:var(--font-display);font-size:clamp(48px,6vw,72px);line-height:1;color:var(--white);letter-spacing:2px;margin-bottom:16px}
+h1.hero-title span{color:var(--gold)}
+
+.hero-sub{font-size:17px;line-height:1.6;color:var(--gray);max-width:440px;margin-bottom:32px}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap}
+
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);font-weight:700;font-size:14px;text-decoration:none;border-radius:6px;transition:all .3s;letter-spacing:0.5px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3)}
+
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border:1px solid rgba(201,168,76,0.4);color:var(--gold);font-weight:600;font-size:14px;text-decoration:none;border-radius:6px;transition:all .3s}
+.btn-outline:hover{background:rgba(201,168,76,0.1);border-color:var(--gold)}
+
+.hero-stats{display:flex;gap:40px;margin-top:40px}
+.hero-stat{text-align:center}
+.hero-stat .num{font-family:var(--font-display);font-size:36px;color:var(--gold);letter-spacing:1px}
+.hero-stat .lbl{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+.hero-right{display:flex;align-items:center;justify-content:center}
+.hero-logo-wrap{position:relative}
+.hero-logo-wrap img{max-width:400px;width:100%;filter:drop-shadow(0 0 40px rgba(201,168,76,0.2));animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* Gold glow pulse */
+.hero-logo-wrap::after{content:'';position:absolute;inset:-20px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.15) 0%,transparent 70%);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+
+/* ── SECTIONS ── */
+section{padding:80px 40px}
+.section-badge{font-family:var(--font-display);font-size:12px;letter-spacing:3px;color:var(--gold);margin-bottom:8px}
+.section-title{font-family:var(--font-display);font-size:clamp(32px,4vw,48px);color:var(--white);letter-spacing:1px;margin-bottom:16px}
+.section-sub{font-size:15px;color:var(--gray);max-width:550px}
+
+/* Gold line decoration */
+.gold-line{height:3px;width:60px;background:linear-gradient(90deg,var(--gold),var(--gold-dark));border-radius:2px;margin:16px 0}
+
+/* ── INVENTORY ── */
+.cars-controls{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin:32px 0}
+.filter-btn{padding:8px 20px;border-radius:6px;background:var(--surface);border:1px solid rgba(201,168,76,0.1);color:var(--gray);font-size:13px;font-weight:600;cursor:pointer;transition:all .3s}
+.filter-btn:hover,.filter-btn.active{background:rgba(201,168,76,0.1);border-color:var(--gold);color:var(--gold)}
+
+.cars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:24px}
+
+.car-card{background:var(--charcoal);border:1px solid rgba(201,168,76,0.08);border-radius:12px;overflow:hidden;transition:all .4s}
+.car-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,0.25);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+.car-img{height:200px;background:var(--surface);overflow:hidden}
+.car-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.car-card:hover .car-img img{transform:scale(1.05)}
+.car-body{padding:20px}
+.car-year{font-family:var(--font-display);font-size:12px;color:var(--gold);letter-spacing:2px}
+.car-name{font-family:var(--font-display);font-size:22px;color:var(--white);letter-spacing:0.5px;margin:4px 0 12px}
+.car-specs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.car-spec{font-size:11px;background:var(--surface);color:var(--gray);padding:4px 10px;border-radius:4px}
+.car-footer{display:flex;align-items:center;justify-content:space-between}
+.car-price{font-family:var(--font-display);font-size:26px;color:var(--gold)}
+.btn-sm{padding:8px 16px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--black);font-weight:700;font-size:12px;border:none;border-radius:6px;cursor:pointer;transition:all .3s}
+.btn-sm:hover{box-shadow:0 4px 16px rgba(201,168,76,0.3)}
+
+/* ── VALUES / WHY US ── */
+.values{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.val-card{background:var(--charcoal);border:1px solid rgba(201,168,76,0.08);border-radius:12px;padding:28px;text-align:center;transition:all .3s}
+.val-card:hover{border-color:rgba(201,168,76,0.25);transform:translateY(-4px)}
+.val-icon{font-size:36px;margin-bottom:12px}
+.val-title{font-family:var(--font-display);font-size:18px;color:var(--white);letter-spacing:0.5px;margin-bottom:8px}
+.val-desc{font-size:13px;color:var(--gray);line-height:1.5}
+
+/* ── FINANCING ── */
+#financing{background:var(--charcoal)}
+.fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:40px}
+.fin-form{background:var(--surface);border:1px solid rgba(201,168,76,0.1);border-radius:12px;padding:32px}
+.fin-form h3{font-family:var(--font-display);font-size:24px;color:var(--white);margin-bottom:20px}
+.fg{margin-bottom:16px}
+.fg label{display:block;font-size:12px;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+.fg input,.fg select{width:100%;padding:12px;background:var(--charcoal);border:1px solid rgba(201,168,76,0.15);border-radius:6px;color:var(--white);font-size:14px;transition:border .3s}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--gold)}
+.fin-features{list-style:none;padding:0}
+.fin-features li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(201,168,76,0.06);color:var(--gray);font-size:14px}
+.fin-features li::before{content:'✦';color:var(--gold);font-size:16px}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:8px 1fr;gap:0;margin-top:32px}
+.about-line{background:linear-gradient(180deg,var(--gold),var(--gold-dark),transparent);border-radius:4px}
+.about-content{padding-left:40px}
+.about-content p{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:16px}
+
+/* ── CONTACT ── */
+#contact{background:var(--charcoal)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
+.contact-item{display:flex;gap:16px;margin-bottom:24px}
+.contact-icon{width:48px;height:48px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-label{font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
+.contact-val{font-size:15px;color:var(--white);margin-top:4px}
+.contact-val a{color:var(--gold);text-decoration:none}
+
+.map-bar{background:var(--surface);border:1px solid rgba(201,168,76,0.1);border-radius:12px;padding:32px;text-align:center;margin-top:20px}
+.map-link{color:var(--gold);text-decoration:none;font-weight:600;font-size:14px}
+
+/* ── DETAILS MODAL ── */
+.det-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.det-overlay.open{opacity:1;pointer-events:auto}
+.det-box{background:var(--charcoal);border:1px solid rgba(201,168,76,0.12);border-radius:12px;max-width:1200px;width:96%;max-height:95vh;overflow-y:auto;position:relative}
+.det-carousel{position:relative;height:70vh;max-height:700px;overflow:hidden;border-radius:12px 12px 0 0;background:var(--surface)}
+.det-car-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .5s}
+.det-car-slide.active{opacity:1}
+.det-car-prev,.det-car-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);border:1px solid rgba(201,168,76,0.2);color:var(--white);width:44px;height:44px;border-radius:8px;cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;transition:all .3s;z-index:2}
+.det-car-prev{left:12px}.det-car-next{right:12px}
+.det-car-prev:hover,.det-car-next:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
+.det-car-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
+.det-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:all .3s}
+.det-dot.active{background:var(--gold);transform:scale(1.3)}
+.det-body{padding:28px}
+.det-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.det-title-wrap{flex:1}
+.det-year{font-family:var(--font-display);font-size:14px;color:var(--gold);letter-spacing:2px}
+.det-name{font-family:var(--font-display);font-size:32px;color:var(--white);letter-spacing:1px;margin:4px 0 8px}
+.det-badge-tag{background:rgba(201,168,76,0.15);color:var(--gold);padding:4px 12px;border-radius:3px;font-size:12px;font-weight:600;letter-spacing:0.5px}
+.det-close{background:none;border:1px solid rgba(201,168,76,0.2);color:var(--gray);width:36px;height:36px;border-radius:6px;cursor:pointer;font-size:18px;transition:all .3s;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.det-close:hover{border-color:var(--gold);color:var(--gold)}
+.det-price-row{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(201,168,76,0.08)}
+.det-price{font-family:var(--font-display);font-size:36px;color:var(--gold);letter-spacing:1px}
+.det-monthly{color:var(--gray);font-size:14px}
+.det-monthly strong{color:var(--gold)}
+.det-specs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.det-spec-item{background:var(--surface);border-radius:8px;padding:16px;text-align:center}
+.spec-label{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.spec-val{font-family:var(--font-display);font-size:18px;color:var(--white);letter-spacing:0.5px}
+.det-actions{display:flex;gap:12px}
+.det-actions .btn-primary,.det-actions .btn-outline{flex:1;text-align:center;padding:14px 20px}
+
+/* ── FOOTER ── */
+footer{background:var(--charcoal);border-top:1px solid rgba(201,168,76,0.1);padding:48px 0 24px}
+.foot-inner{max-width:1200px;margin:0 auto;padding:0 40px}
+.foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.foot-brand img{height:60px;margin-bottom:12px;filter:drop-shadow(0 0 8px rgba(201,168,76,0.2))}
+.foot-brand p{font-size:13px;color:var(--gray);line-height:1.6}
+footer h5{font-family:var(--font-display);font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:12px}
+footer ul{list-style:none}
+footer li{margin-bottom:8px}
+footer a{color:var(--gray);text-decoration:none;font-size:13px;transition:color .3s}
+footer a:hover{color:var(--gold)}
+.foot-bottom{border-top:1px solid rgba(201,168,76,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--gray-dark)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--gold);color:var(--black);padding:14px 24px;border-radius:8px;font-weight:600;font-size:14px;opacity:0;transform:translateY(20px);transition:all .3s;z-index:2000}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-split{grid-template-columns:1fr;padding:0 30px}
+  .hero-left{padding-right:0;text-align:center}
+  .hero-right{order:-1;height:auto;margin-bottom:24px}
+  .hero-logo-wrap img{max-width:280px}
+  .hero-stats{justify-content:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-buttons{justify-content:center}
+  .fin-grid{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  nav{padding:0 16px;height:70px}.nav-links{display:none}.hamburger{display:flex}
+  .logo img{height:55px}
+  #hero{padding-top:80px}
+  section{padding:60px 20px}
+  .hero-logo-wrap img{max-width:220px}
+  .contact-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:6px 1fr}
+  .about-content{padding-left:30px}
+  .foot-top{grid-template-columns:1fr 1fr;gap:30px}
+  .cars-grid{grid-template-columns:1fr}
+  .det-box{max-width:100%;border-radius:8px}
+  .det-carousel{height:50vh;max-height:450px}
+  .det-body{padding:20px}
+  .det-specs-grid{grid-template-columns:repeat(2,1fr)}
+  .values{grid-template-columns:repeat(2,1fr)}
+  .map-bar{padding:24px 20px}
+  .foot-inner{padding:0 20px}
+}
+@media(max-width:480px){
+  nav{height:60px;padding:0 12px}
+  .logo img{height:45px}
+  #hero{padding-top:70px}
+  section{padding:50px 16px}
+  .hero-split{padding:0 16px}
+  .hero-badge{font-size:10px;padding:5px 10px;text-align:center}
+  .hero-logo-wrap img{max-width:180px}
+  h1.hero-title{font-size:clamp(36px,9vw,48px)}
+  .hero-sub{font-size:15px}
+  .hero-buttons{flex-direction:column;align-items:stretch}
+  .hero-buttons a{text-align:center}
+  .values{grid-template-columns:1fr}
+  .hero-stats{flex-direction:column;align-items:center}
+  .foot-top{grid-template-columns:1fr}
+  .det-actions{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="logo"><img src="NATIQ'S.jpeg" alt="Natiq's Auto Hub"></a>
+  <div class="nav-links">
+    <a href="#inventory"><span class="en">Inventory</span><span class="es" style="display:none">Inventario</span></a>
+    <a href="#why"><span class="en">Why Us</span><span class="es" style="display:none">Nosotros</span></a>
+    <a href="#financing"><span class="en">Financing</span><span class="es" style="display:none">Financiamiento</span></a>
+    <a href="#contact"><span class="en">Contact</span><span class="es" style="display:none">Contacto</span></a>
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+  <div class="hamburger" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mob-overlay" id="mobNav">
+  <a href="#inventory" onclick="closeMobile()"><span class="en">Inventory</span><span class="es" style="display:none">Inventario</span></a>
+  <a href="#why" onclick="closeMobile()"><span class="en">Why Us</span><span class="es" style="display:none">Nosotros</span></a>
+  <a href="#financing" onclick="closeMobile()"><span class="en">Financing</span><span class="es" style="display:none">Financiamiento</span></a>
+  <a href="#contact" onclick="closeMobile()"><span class="en">Contact</span><span class="es" style="display:none">Contacto</span></a>
+  <div style="margin-top:20px;display:flex;gap:12px">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-split">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="en">VAN NUYS' TRUSTED DEALERSHIP</span>
+        <span class="es" style="display:none">TU DEALER DE CONFIANZA EN VAN NUYS</span>
+      </div>
+      <div class="hero-logo-wrap" style="display:none">
+        <img src="NATIQ'S.jpeg" alt="Natiq's Auto Hub">
+      </div>
+      <h1 class="hero-title">
+        <span class="en">YOUR NEXT <span>CAR</span> STARTS HERE</span>
+        <span class="es" style="display:none">TU PR&Oacute;XIMO <span>CARRO</span> EMPIEZA AQU&Iacute;</span>
+      </h1>
+      <p class="hero-sub">
+        <span class="en">Quality pre-owned vehicles, easy financing, and personalized service. All credit types welcome. Drive off today.</span>
+        <span class="es" style="display:none">Veh&iacute;culos de calidad, financiamiento f&aacute;cil y servicio personalizado. Todo tipo de cr&eacute;dito. Mane&aacute;jalo hoy.</span>
+      </p>
+      <div class="hero-buttons">
+        <a href="#inventory" class="btn-primary">
+          <span class="en">&#128663; Browse Inventory</span>
+          <span class="es" style="display:none">&#128663; Ver Inventario</span>
+        </a>
+        <a href="#financing" class="btn-outline">
+          <span class="en">Apply for Financing</span>
+          <span class="es" style="display:none">Aplicar Financiamiento</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num" id="statCars">0</div><div class="lbl"><span class="en">Vehicles</span><span class="es" style="display:none">Veh&iacute;culos</span></div></div>
+        <div class="hero-stat"><div class="num">100%</div><div class="lbl"><span class="en">Inspected</span><span class="es" style="display:none">Inspeccionados</span></div></div>
+        <div class="hero-stat"><div class="num">All</div><div class="lbl"><span class="en">Credit Types</span><span class="es" style="display:none">Tipos de Cr&eacute;dito</span></div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-logo-wrap">
+        <img src="NATIQ'S.jpeg" alt="Natiq's Auto Hub">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVENTORY -->
+<section id="inventory">
+  <div class="section-badge">
+    <span class="en">OUR COLLECTION</span>
+    <span class="es" style="display:none">NUESTRA COLECCI&Oacute;N</span>
+  </div>
+  <div class="section-title">
+    <span class="en">Browse Our Inventory</span>
+    <span class="es" style="display:none">Explora Nuestro Inventario</span>
+  </div>
+  <div class="gold-line"></div>
+  <p class="section-sub">
+    <span class="en">Every vehicle is fully inspected and road-ready. Find your perfect ride today.</span>
+    <span class="es" style="display:none">Cada veh&iacute;culo est&aacute; inspeccionado y listo para manejar.</span>
+  </p>
+
+  <div class="cars-controls">
+    <button class="filter-btn active" onclick="filterCars('all')"><span class="en">All</span><span class="es" style="display:none">Todos</span></button>
+    <button class="filter-btn" onclick="filterCars('sedan')">Sedan</button>
+    <button class="filter-btn" onclick="filterCars('suv')">SUV</button>
+    <button class="filter-btn" onclick="filterCars('truck')">Truck</button>
+  </div>
+  <div class="cars-grid" id="carsGrid"></div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-badge">
+    <span class="en">WHY NATIQS</span>
+    <span class="es" style="display:none">POR QU&Eacute; NATIQS</span>
+  </div>
+  <div class="section-title">
+    <span class="en">Why Choose Us</span>
+    <span class="es" style="display:none">&iquest;Por Qu&eacute; Elegirnos?</span>
+  </div>
+  <div class="gold-line"></div>
+  <div class="values">
+    <div class="val-card">
+      <div class="val-icon">&#128270;</div>
+      <div class="val-title"><span class="en">Fully Inspected</span><span class="es" style="display:none">Inspeccionados</span></div>
+      <div class="val-desc"><span class="en">Every car goes through a thorough inspection before hitting our lot.</span><span class="es" style="display:none">Cada carro pasa por una inspecci&oacute;n completa.</span></div>
+    </div>
+    <div class="val-card">
+      <div class="val-icon">&#128176;</div>
+      <div class="val-title"><span class="en">Easy Financing</span><span class="es" style="display:none">Financiamiento F&aacute;cil</span></div>
+      <div class="val-desc"><span class="en">All credit types welcome. We work with multiple lenders to get you approved.</span><span class="es" style="display:none">Todo tipo de cr&eacute;dito. Trabajamos con m&uacute;ltiples financieras.</span></div>
+    </div>
+    <div class="val-card">
+      <div class="val-icon">&#129309;</div>
+      <div class="val-title"><span class="en">Personal Service</span><span class="es" style="display:none">Servicio Personal</span></div>
+      <div class="val-desc"><span class="en">We take time to understand your needs and find the perfect car for you.</span><span class="es" style="display:none">Nos tomamos el tiempo para encontrar el carro perfecto para ti.</span></div>
+    </div>
+    <div class="val-card">
+      <div class="val-icon">&#9989;</div>
+      <div class="val-title"><span class="en">Drive Today</span><span class="es" style="display:none">Man&eacute;jalo Hoy</span></div>
+      <div class="val-desc"><span class="en">Fast process, minimal paperwork. Drive off the lot the same day.</span><span class="es" style="display:none">Proceso r&aacute;pido, poco papeleo. Ll&eacute;vatelo el mismo d&iacute;a.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCING -->
+<section id="financing">
+  <div class="fin-grid">
+    <div>
+      <div class="section-badge">
+        <span class="en">GET APPROVED</span>
+        <span class="es" style="display:none">APROBACI&Oacute;N</span>
+      </div>
+      <div class="section-title">
+        <span class="en">Financing Made Easy</span>
+        <span class="es" style="display:none">Financiamiento F&aacute;cil</span>
+      </div>
+      <div class="gold-line"></div>
+      <ul class="fin-features">
+        <li><span class="en">All credit scores welcome — good, bad, or no credit</span><span class="es" style="display:none">Todo tipo de cr&eacute;dito — bueno, malo o sin cr&eacute;dito</span></li>
+        <li><span class="en">Low down payments available</span><span class="es" style="display:none">Enganches bajos disponibles</span></li>
+        <li><span class="en">Quick approval process</span><span class="es" style="display:none">Proceso de aprobaci&oacute;n r&aacute;pido</span></li>
+        <li><span class="en">Multiple lender options</span><span class="es" style="display:none">M&uacute;ltiples opciones de financieras</span></li>
+        <li><span class="en">Flexible payment plans</span><span class="es" style="display:none">Planes de pago flexibles</span></li>
+      </ul>
+    </div>
+    <div class="fin-form">
+      <h3><span class="en">Pre-Qualify Now</span><span class="es" style="display:none">Pre-Califica Ahora</span></h3>
+      <div class="fg"><label><span class="en">Full Name</span><span class="es" style="display:none">Nombre Completo</span></label><input type="text" placeholder="John Doe"></div>
+      <div class="fg"><label><span class="en">Phone</span><span class="es" style="display:none">Tel&eacute;fono</span></label><input type="tel" placeholder="(747) 000-0000"></div>
+      <div class="fg"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+      <div class="fg"><label><span class="en">Vehicle of Interest</span><span class="es" style="display:none">Veh&iacute;culo de Inter&eacute;s</span></label><input type="text" placeholder="e.g. 2020 Toyota Camry"></div>
+      <button class="btn-primary" style="width:100%;justify-content:center;border:none;cursor:pointer;font-size:15px;padding:16px" onclick="submitFinancing()">
+        <span class="en">Submit Application</span>
+        <span class="es" style="display:none">Enviar Solicitud</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-badge">
+    <span class="en">OUR STORY</span>
+    <span class="es" style="display:none">NUESTRA HISTORIA</span>
+  </div>
+  <div class="section-title">
+    <span class="en">About Natiq's Auto Hub</span>
+    <span class="es" style="display:none">Acerca de Natiq's Auto Hub</span>
+  </div>
+  <div class="gold-line"></div>
+  <div class="about-grid">
+    <div class="about-line"></div>
+    <div class="about-content">
+      <p><span class="en">Located in Van Nuys, California, Natiq's Auto Hub was founded with a simple mission: make car buying easy, affordable, and stress-free for everyone.</span><span class="es" style="display:none">Ubicados en Van Nuys, California, Natiq's Auto Hub fue fundado con una misi&oacute;n simple: hacer la compra de carros f&aacute;cil, accesible y sin estr&eacute;s para todos.</span></p>
+      <p><span class="en">We offer a wide selection of quality pre-owned vehicles — sedans, SUVs, trucks, and hybrids — all fully inspected and ready for the road. Whether you're buying your first car or upgrading, we provide personalized service and flexible financing to fit your needs.</span><span class="es" style="display:none">Ofrecemos una amplia selecci&oacute;n de veh&iacute;culos de calidad — sedanes, SUVs, camionetas e h&iacute;bridos — todos inspeccionados y listos. Ya sea tu primer carro o una mejora, brindamos servicio personalizado y financiamiento flexible.</span></p>
+      <p><span class="en">At Natiq's Auto Hub, we believe everyone deserves a reliable car. That's why we welcome all credit types and work hard to get you behind the wheel.</span><span class="es" style="display:none">En Natiq's Auto Hub, creemos que todos merecen un carro confiable. Por eso aceptamos todo tipo de cr&eacute;dito y trabajamos para ponerte al volante.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-badge">
+    <span class="en">GET IN TOUCH</span>
+    <span class="es" style="display:none">CONT&Aacute;CTANOS</span>
+  </div>
+  <div class="section-title">
+    <span class="en">Visit Us Today</span>
+    <span class="es" style="display:none">Vis&iacute;tanos Hoy</span>
+  </div>
+  <div class="gold-line"></div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-item">
+        <div class="contact-icon">&#128205;</div>
+        <div>
+          <div class="contact-label"><span class="en">Address</span><span class="es" style="display:none">Direcci&oacute;n</span></div>
+          <div class="contact-val">14545 Friar St Unit 264<br>Van Nuys, CA 91411</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#128222;</div>
+        <div>
+          <div class="contact-label"><span class="en">Phone</span><span class="es" style="display:none">Tel&eacute;fono</span></div>
+          <div class="contact-val"><a href="tel:7473791582">(747) 379-1582</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">&#128231;</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val"><a href="mailto:info@natiqsautohub.com">info@natiqsautohub.com</a></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-item">
+        <div class="contact-icon">&#128336;</div>
+        <div>
+          <div class="contact-label"><span class="en">Hours</span><span class="es" style="display:none">Horario</span></div>
+          <div class="contact-val">
+            <span class="en">Mon - Sat: 10AM - 6PM<br>Sun: By Appointment</span>
+            <span class="es" style="display:none">Lun - S&aacute;b: 10AM - 6PM<br>Dom: Con Cita</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="map-bar">
+    <a href="https://maps.google.com/?q=14545+Friar+St+Unit+264+Van+Nuys+CA+91411" target="_blank" class="map-link">
+      <span class="en">&#128204; Get Directions on Google Maps</span>
+      <span class="es" style="display:none">&#128204; C&oacute;mo Llegar en Google Maps</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="NATIQ'S.jpeg" alt="Natiq's Auto Hub">
+        <p><span class="en">Your trusted used car dealership in Van Nuys, CA. Quality cars, easy financing, personalized service.</span><span class="es" style="display:none">Tu concesionario de confianza en Van Nuys, CA. Carros de calidad, financiamiento f&aacute;cil.</span></p>
+      </div>
+      <div class="foot-col">
+        <h5><span class="en">Quick Links</span><span class="es" style="display:none">Enlaces</span></h5>
+        <ul>
+          <li><a href="#inventory"><span class="en">Inventory</span><span class="es" style="display:none">Inventario</span></a></li>
+          <li><a href="#financing"><span class="en">Financing</span><span class="es" style="display:none">Financiamiento</span></a></li>
+          <li><a href="#about"><span class="en">About Us</span><span class="es" style="display:none">Nosotros</span></a></li>
+          <li><a href="#contact"><span class="en">Contact</span><span class="es" style="display:none">Contacto</span></a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5><span class="en">Hours</span><span class="es" style="display:none">Horario</span></h5>
+        <ul>
+          <li><a href="#"><span class="en">Mon-Sat: 10AM-6PM</span><span class="es" style="display:none">Lun-S&aacute;b: 10AM-6PM</span></a></li>
+          <li><a href="#"><span class="en">Sun: By Appointment</span><span class="es" style="display:none">Dom: Con Cita</span></a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5><span class="en">Contact</span><span class="es" style="display:none">Contacto</span></h5>
+        <ul>
+          <li><a href="#">14545 Friar St Unit 264</a></li>
+          <li><a href="#">Van Nuys, CA 91411</a></li>
+          <li><a href="tel:7473791582">(747) 379-1582</a></li>
+          <li><a href="mailto:info@natiqsautohub.com">info@natiqsautohub.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2025 Natiq's Auto Hub. All rights reserved.</span>
+      <a href="privacy.html" style="color:var(--gray-dark);text-decoration:underline">Privacy Policy</a>
+      <a href="terms.html" style="color:var(--gray-dark);text-decoration:underline">Terms & Conditions</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- DETAILS MODAL -->
+<div class="det-overlay" id="detOverlay">
+  <div class="det-box">
+    <div id="detImg"></div>
+    <div class="det-body">
+      <div class="det-head">
+        <div class="det-title-wrap">
+          <div class="det-year" id="detYear"></div>
+          <div class="det-name" id="detName"></div>
+          <span class="det-badge-tag" id="detBadge"></span>
+        </div>
+        <button class="det-close" onclick="closeDetails()">&#x2715;</button>
+      </div>
+      <div class="det-price-row">
+        <div class="det-price" id="detPrice"></div>
+        <div class="det-monthly" id="detMonthly"></div>
+      </div>
+      <div class="det-specs-grid">
+        <div class="det-spec-item"><div class="spec-label" id="detLabelMileage">Mileage</div><div class="spec-val" id="detMileage"></div></div>
+        <div class="det-spec-item"><div class="spec-label" id="detLabelDrive">Drivetrain</div><div class="spec-val" id="detDrive"></div></div>
+        <div class="det-spec-item"><div class="spec-label" id="detLabelType">Type</div><div class="spec-val" id="detType"></div></div>
+        <div class="det-spec-item"><div class="spec-label" id="detLabelFuel">Fuel</div><div class="spec-val" id="detFuel"></div></div>
+      </div>
+      <div class="det-actions">
+        <a href="#financing" class="btn-primary" id="detBtnFinance" onclick="closeDetails();applyForFinancing(window._detCurrentCarId)"><span class="en">Apply for Financing</span><span class="es" style="display:none">Aplicar Financiamiento</span></a>
+        <a href="#contact" class="btn-outline" id="detBtnContact" onclick="closeDetails()"><span class="en">Contact Us</span><span class="es" style="display:none">Cont&aacute;ctanos</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// NATIQ'S AUTO HUB — JAVASCRIPT
+// ═══════════════════════════════════════
+
+const NOVA_API = 'https://www.trynova.app/api/v1/public/natiqs-auto-hub/vehicles';
+let cars = [];
+let currentFilter = 'all';
+
+// ── FETCH INVENTORY FROM NOVA ──
+async function loadInventory() {
+  try {
+    const res = await fetch(NOVA_API + '?page_size=50');
+    if (!res.ok) throw new Error('API error');
+    const json = await res.json();
+    cars = (json.data || []).map(v => ({
+      id: v.id,
+      year: v.year,
+      make: v.make,
+      model: v.model,
+      price: v.selling_price || 0,
+      monthly: Math.round((v.selling_price || 0) / 48),
+      mileage: v.mileage ? v.mileage.toLocaleString() + ' mi' : 'N/A',
+      drive: v.drivetrain || 'N/A',
+      type: (v.body_style || 'sedan').toLowerCase(),
+      fuel: v.fuel_type || 'Gasoline',
+      badge: v.body_style || 'Sedan',
+      img: v.primary_photo_url || '',
+      imgs: v.photo_urls || (v.primary_photo_url ? [v.primary_photo_url] : []),
+    }));
+    document.getElementById('statCars').textContent = cars.length;
+    renderCars();
+  } catch (e) {
+    console.log('NOVA API not available, showing demo inventory');
+    loadDemoInventory();
+  }
+}
+
+function loadDemoInventory() {
+  cars = [
+    { id:'1', year:2020, make:'Toyota', model:'Camry', price:18500, monthly:385, mileage:'45,000 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'', imgs:[] },
+    { id:'2', year:2019, make:'Honda', model:'CR-V', price:22000, monthly:458, mileage:'52,000 mi', drive:'AWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'', imgs:[] },
+    { id:'3', year:2021, make:'Ford', model:'F-150', price:32000, monthly:667, mileage:'38,000 mi', drive:'4WD', type:'truck', fuel:'Gasoline', badge:'Truck', img:'', imgs:[] },
+    { id:'4', year:2020, make:'Nissan', model:'Altima', price:16500, monthly:344, mileage:'55,000 mi', drive:'FWD', type:'sedan', fuel:'Gasoline', badge:'Sedan', img:'', imgs:[] },
+    { id:'5', year:2018, make:'Chevrolet', model:'Equinox', price:17000, monthly:354, mileage:'62,000 mi', drive:'AWD', type:'suv', fuel:'Gasoline', badge:'SUV', img:'', imgs:[] },
+    { id:'6', year:2021, make:'Toyota', model:'RAV4', price:26500, monthly:552, mileage:'35,000 mi', drive:'AWD', type:'suv', fuel:'Hybrid', badge:'SUV', img:'', imgs:[] },
+  ];
+  document.getElementById('statCars').textContent = cars.length;
+  renderCars();
+}
+
+// ── RENDER CARS ──
+function renderCars() {
+  const grid = document.getElementById('carsGrid');
+  const lang = document.querySelector('.lang-btn.active').textContent.toLowerCase();
+  const isEs = lang === 'es';
+  const filtered = currentFilter === 'all' ? cars : cars.filter(c => c.type === currentFilter);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--gray)">${isEs ? 'No hay vehículos en esta categoría' : 'No vehicles in this category'}</div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(c => {
+    const fmtPrice = '$' + c.price.toLocaleString();
+    const imgHtml = c.img
+      ? `<img src="${c.img}" alt="${c.year} ${c.make} ${c.model}" loading="lazy">`
+      : `<div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:var(--gold-dark)">&#128663;</div>`;
+    return `
+      <div class="car-card" data-type="${c.type}">
+        <div class="car-img">${imgHtml}</div>
+        <div class="car-body">
+          <div class="car-year">${c.year}</div>
+          <div class="car-name">${c.make} ${c.model}</div>
+          <div class="car-specs">
+            <span class="car-spec">${c.mileage}</span>
+            <span class="car-spec">${c.drive}</span>
+            <span class="car-spec">${c.badge}</span>
+          </div>
+          <div class="car-footer">
+            <div class="car-price">${fmtPrice}</div>
+            <button class="btn-sm" onclick="openDetails('${c.id}')"><span class="en">Details</span><span class="es" style="display:none">Detalles</span></button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function filterCars(type) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderCars();
+}
+
+function fmtPrice(n) { return '$' + Number(n).toLocaleString(); }
+
+// ── DETAILS MODAL ──
+function openDetails(id) {
+  const c = cars.find(x => x.id === id); if (!c) return;
+  const lang = document.querySelector('.lang-btn.active').textContent.toLowerCase();
+  const isEs = lang === 'es';
+  const ol = document.getElementById('detOverlay');
+
+  const imgs = Array.isArray(c.imgs) ? c.imgs : (c.img ? [c.img] : []);
+  const imgWrap = document.getElementById('detImg');
+  if (imgs.length > 0) {
+    imgWrap.innerHTML = `
+      <div class="det-carousel" id="detCarousel">
+        ${imgs.map((src, i) => `<img src="${src}" class="det-car-slide${i === 0 ? ' active' : ''}" data-idx="${i}" alt="photo ${i + 1}">`).join('')}
+        ${imgs.length > 1 ? `
+        <button class="det-car-prev" onclick="carouselNav(-1)">&#8249;</button>
+        <button class="det-car-next" onclick="carouselNav(1)">&#8250;</button>
+        <div class="det-car-dots">${imgs.map((_, i) => `<span class="det-dot${i === 0 ? ' active' : ''}" onclick="carouselGo(${i})"></span>`).join('')}</div>` : ''}
+      </div>`;
+    window._detCarouselIdx = 0;
+    window._detCarouselTotal = imgs.length;
+  } else {
+    imgWrap.innerHTML = `<div style="height:300px;display:flex;align-items:center;justify-content:center;font-size:60px;background:var(--surface);border-radius:12px 12px 0 0;color:var(--gold-dark)">&#128663;</div>`;
+  }
+
+  document.getElementById('detYear').textContent = c.year;
+  document.getElementById('detName').textContent = c.make + ' ' + c.model;
+  document.getElementById('detBadge').textContent = c.badge;
+  document.getElementById('detPrice').textContent = fmtPrice(c.price);
+  document.getElementById('detMonthly').innerHTML = (isEs ? 'Desde ' : 'From ') + `<strong>${fmtPrice(c.monthly)}/${isEs ? 'mes' : 'mo'}</strong>`;
+  document.getElementById('detMileage').textContent = c.mileage;
+  document.getElementById('detDrive').textContent = c.drive;
+  document.getElementById('detType').textContent = c.type.charAt(0).toUpperCase() + c.type.slice(1);
+  document.getElementById('detFuel').textContent = c.fuel || (isEs ? 'Gasolina' : 'Gasoline');
+
+  document.getElementById('detLabelMileage').textContent = isEs ? 'Millaje' : 'Mileage';
+  document.getElementById('detLabelDrive').textContent = isEs ? 'Tracción' : 'Drivetrain';
+  document.getElementById('detLabelType').textContent = isEs ? 'Tipo' : 'Type';
+  document.getElementById('detLabelFuel').textContent = isEs ? 'Combustible' : 'Fuel';
+
+  window._detCurrentCarId = c.id;
+  ol.classList.add('open');
+}
+
+function carouselGo(idx) {
+  const slides = document.querySelectorAll('.det-car-slide');
+  const dots = document.querySelectorAll('.det-dot');
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
+  if (slides[idx]) slides[idx].classList.add('active');
+  if (dots[idx]) dots[idx].classList.add('active');
+  window._detCarouselIdx = idx;
+}
+function carouselNav(dir) {
+  const total = window._detCarouselTotal || 1;
+  const next = ((window._detCarouselIdx || 0) + dir + total) % total;
+  carouselGo(next);
+}
+function closeDetails() {
+  document.getElementById('detOverlay').classList.remove('open');
+}
+document.getElementById('detOverlay').addEventListener('click', function(e) {
+  if (e.target === e.currentTarget) closeDetails();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeDetails();
+});
+
+// ── LANGUAGE ──
+function setLang(lang) {
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase() === lang);
+  });
+  document.querySelectorAll('.en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+  document.querySelectorAll('.es').forEach(el => el.style.display = lang === 'es' ? '' : 'none');
+  renderCars();
+}
+
+// ── MOBILE NAV ──
+function toggleMobile() { document.getElementById('mobNav').classList.toggle('open'); }
+function closeMobile() { document.getElementById('mobNav').classList.remove('open'); }
+
+// ── FINANCING FORM ──
+function submitFinancing() {
+  const lang = document.querySelector('.lang-btn.active').textContent.toLowerCase();
+  showToast(lang === 'es' ? 'Solicitud enviada. Te contactaremos pronto.' : 'Application submitted! We\'ll contact you soon.');
+}
+function applyForFinancing(carId) {
+  const c = cars.find(x => x.id === carId);
+  if (c) {
+    const input = document.querySelector('.fin-form input[placeholder*="e.g."]') || document.querySelector('.fin-form input[placeholder*="Toyota"]');
+    if (input) input.value = `${c.year} ${c.make} ${c.model}`;
+  }
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ── INIT ──
+loadInventory();
+</script>
+</body>
+</html>
