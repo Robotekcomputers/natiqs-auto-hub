@@ -418,7 +418,7 @@ async function loadInv(){
     const r=await fetch(NOVA_API+'?page_size=50');
     if(!r.ok) throw 0;
     const j=await r.json();
-    cars=(j.data||[]).map(v=>({id:v.id,year:v.year,make:v.make,model:v.model,price:v.selling_price||0,monthly:Math.round((v.selling_price||0)/48),mileage:v.mileage?v.mileage.toLocaleString()+' mi':'N/A',drive:v.drivetrain||'N/A',type:(v.body_style||'sedan').toLowerCase(),fuel:v.fuel_type||'Gasoline',badge:v.body_style||'Sedan',img:v.primary_photo_url||'',imgs:v.photo_urls||(v.primary_photo_url?[v.primary_photo_url]:[])}));
+    cars=(j.data||[]).map(v=>{const ps=(v.photos||[]).slice().sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));const primary=ps.find(p=>p.is_primary)||ps[0];return{id:v.id,year:v.year,make:v.make,model:v.model,price:v.selling_price||0,monthly:Math.round((v.selling_price||0)/48),mileage:v.mileage?v.mileage.toLocaleString()+' mi':'N/A',drive:v.drivetrain||'N/A',type:(v.body_style||'sedan').toLowerCase(),fuel:v.fuel_type||'Gasoline',badge:v.body_style||'Sedan',img:primary?.url||'',imgs:ps.map(p=>p.url)}});
     document.getElementById('statCars').textContent=cars.length;
     render();
   }catch(e){console.log('Using demo');loadDemo();}
